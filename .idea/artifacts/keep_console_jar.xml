@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="keep_console:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/keep_console_jar</output-path>
+    <root id="archive" name="keep_console.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="keep_console" />
+    </root>
+  </artifact>
+</component>
