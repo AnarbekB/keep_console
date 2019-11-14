@@ -19,6 +19,6 @@ public class ArgumentParser {
             }
         }
 
-        return options.getOption("menu");
+        return options.getOption("-h");
     }
 }

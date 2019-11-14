@@ -1,6 +1,5 @@
 package ru.anarbek.cli;
 
-import ru.anarbek.constant.Argument;
 import ru.anarbek.helper.Util;
 
 import java.util.ArrayList;
@@ -17,19 +16,20 @@ public class Options {
     private final List<Object> requiredOpts = new ArrayList<Object>();
 
     public Options(ArrayList<Option> options) {
+        if (options == null) {
+            return;
+        }
         for (Option option : options) {
             addOption(option);
         }
     }
 
-    public Options addOption(String name, String longName, boolean required, String description, Argument argument)
+    private void addOption(Option opt)
     {
-        addOption(new Option(name, longName, required, description, argument));
-        return this;
-    }
+        if (opt == null) {
+            return;
+        }
 
-    public Options addOption(Option opt)
-    {
         String key = opt.getName();
 
         // add it to the long option list
@@ -49,14 +49,11 @@ public class Options {
         }
 
         shortOpts.put(key, opt);
-
-        return this;
     }
 
     public Option getOption(String option)
     {
-        //пока команды хранятся с префиксом -- или -
-        //option = Util.stripLeadingHyphens(option);
+        option = Util.stripLeadingHyphens(option);
 
         if (shortOpts.containsKey(option))
         {

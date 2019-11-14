@@ -6,8 +6,6 @@ public class ViewFactory {
 
     public static Page buid(Argument argument) throws Exception {
         switch (argument) {
-            case MAIN:
-                return new MainMenu();
             case CREATE_KEEP:
                 return new CreateKeep();
             case HELP:

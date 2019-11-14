@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <options>
-    <identifier id="0" name="-h" longName="--help" required="N" description="Help me" argument="HELP"/>
-    <identifier id="1" name="-c" longName="--create" required="N" description="Create keep" argument="CREATE_KEEP"/>
+    <identifier id="0" name="h" longName="help" required="N" description="Help me" argument="HELP"/>
+    <identifier id="1" name="c" longName="create" required="N" description="Create keep" argument="CREATE_KEEP"/>
 </options>

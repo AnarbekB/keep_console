@@ -17,33 +17,18 @@ import ru.anarbek.constant.Argument;
 
 public class OptionsBuilder {
 
-    private static String pathXML = "src/main/resources/options.xml";
-
     public static Options build() {
-        ArrayList<Option> options = loadFromXML();
-        options = addMenuOption(options);
+        String path = "src/main/resources/options.xml";
+        ArrayList<Option> options = loadFromXML(path);
         return new Options(options);
     }
 
-    private static ArrayList<Option> addMenuOption(ArrayList<Option> options) {
-        Option menuOption = new Option(
-                "m",
-                "menu",
-                false,
-                "Main menu",
-                Argument.MAIN
-        );
-
-        options.add(menuOption);
-        return options;
-    }
-
-    private static ArrayList<Option> loadFromXML() {
+    private static ArrayList<Option> loadFromXML(final String path) {
         ArrayList<Option> records = new ArrayList<Option>();
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(new File(pathXML));
+            Document document = documentBuilder.parse(new File(path));
             NodeList nameList = document.getElementsByTagName("identifier");
 
             int lastId = 0;
