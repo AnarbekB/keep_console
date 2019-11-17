@@ -2,18 +2,15 @@ package ru.anarbek.cli;
 
 import ru.anarbek.helper.Util;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Options {
 
-    private final Map<String, Option> shortOpts = new LinkedHashMap<String, Option>();
+    private final Map<String, Option> shortOpts = new LinkedHashMap<>();
 
-    private final Map<String, Option> longOpts = new LinkedHashMap<String, Option>();
+    private final Map<String, Option> longOpts = new LinkedHashMap<>();
 
-    private final List<Object> requiredOpts = new ArrayList<Object>();
+    private final List<Object> requiredOpts = new ArrayList<>();
 
     public Options(ArrayList<Option> options) {
         if (options == null) {
@@ -24,8 +21,7 @@ public class Options {
         }
     }
 
-    private void addOption(Option opt)
-    {
+    private void addOption(Option opt) {
         if (opt == null) {
             return;
         }
@@ -43,7 +39,7 @@ public class Options {
         {
             if (requiredOpts.contains(key))
             {
-                requiredOpts.remove(requiredOpts.indexOf(key));
+                requiredOpts.remove(opt);
             }
             requiredOpts.add(key);
         }
@@ -51,8 +47,7 @@ public class Options {
         shortOpts.put(key, opt);
     }
 
-    public Option getOption(String option)
-    {
+    public Option getOption(String option) {
         option = Util.stripLeadingHyphens(option);
 
         if (shortOpts.containsKey(option))
@@ -61,5 +56,13 @@ public class Options {
         }
 
         return longOpts.get(option);
+    }
+
+    public Collection<Option> getOptions() {
+        return Collections.unmodifiableCollection(helpOptions());
+    }
+
+    private List<Option> helpOptions() {
+        return new ArrayList<>(shortOpts.values());
     }
 }

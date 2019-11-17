@@ -10,6 +10,8 @@ public class ViewFactory {
                 return new CreateKeep();
             case HELP:
                 return new Help();
+            case LIST_KEEP:
+                return new ListKeep();
         }
 
         throw new Exception("page not found");
