@@ -4,6 +4,8 @@ import ru.anarbek.constant.Argument;
 
 public class Option {
 
+    private final int id;
+
     private final String name;
 
     private String longName;
@@ -14,12 +16,22 @@ public class Option {
 
     private String description;
 
-    public Option(String name, String longName, boolean required, String description, Argument argument) {
+    private Option parent;
+
+    private Options children;
+
+    public Option(int id, String name, String longName, boolean required, String description, Argument argument, Option parent) {
+        this.id = id;
         this.name = name;
         this.longName = longName;
         this.required = required;
         this.description = description;
         this.argument = argument;
+        this.parent = parent;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Argument getArgument() {
@@ -55,5 +67,17 @@ public class Option {
 
     public String getLongNameWithHyphens() {
         return "--".concat(this.longName);
+    }
+
+    public Option getParent() {
+        return parent;
+    }
+
+    public void addChildren(Option option) {
+        if (children == null) {
+            this.children = new Options(option);
+        } else {
+            this.children.addOption(option);
+        }
     }
 }

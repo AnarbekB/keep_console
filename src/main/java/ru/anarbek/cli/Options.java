@@ -12,6 +12,10 @@ public class Options {
 
     private final List<Object> requiredOpts = new ArrayList<>();
 
+    public Options(Option option) {
+        addOption(option);
+    }
+
     public Options(ArrayList<Option> options) {
         if (options == null) {
             return;
@@ -21,7 +25,7 @@ public class Options {
         }
     }
 
-    private void addOption(Option opt) {
+    public void addOption(Option opt) {
         if (opt == null) {
             return;
         }

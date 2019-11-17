@@ -29,7 +29,7 @@ public class OptionsBuilder {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(new File(path));
-            NodeList nameList = document.getElementsByTagName("identifier");
+            NodeList nameList = document.getElementsByTagName("option");
 
             int lastId = 0;
             for (int i = 0; i < nameList.getLength(); i++) {
@@ -39,13 +39,34 @@ public class OptionsBuilder {
                 if (lastId < currentId) {
                     lastId = currentId;
                 }
+
+                //if the option has a parent
+                int parentId = Integer.parseInt(attributes.getNamedItem("parent").getTextContent());
+                Option parent = null;
+                if (parentId >= 0) {
+                    for (Option opt: records) {
+                        if (opt.getId() == parentId) {
+                            parent = opt;
+                        }
+                    }
+                }
+
+                //crate option
                 Option option = new Option(
+                        Integer.parseInt(attributes.getNamedItem("id").getTextContent()),
                         attributes.getNamedItem("name").getTextContent(),
                         attributes.getNamedItem("longName").getTextContent(),
                         attributes.getNamedItem("required").getTextContent().equals("Y"),
                         attributes.getNamedItem("description").getTextContent(),
-                        Argument.valueOf(attributes.getNamedItem("argument").getTextContent())
+                        Argument.valueOf(attributes.getNamedItem("argument").getTextContent()),
+                        parent
                 );
+
+                if (parent != null) {
+                    //if the option has a parent, add children to the parent
+                    parent.addChildren(option);
+                }
+
                 records.add(option);
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
