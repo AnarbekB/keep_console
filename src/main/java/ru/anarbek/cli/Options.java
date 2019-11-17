@@ -29,7 +29,7 @@ public class Options {
         String key = opt.getName();
 
         // add it to the long option list
-        if (opt.hasLongOpt())
+        if (opt.hasLongOption())
         {
             longOpts.put(opt.getLongName(), opt);
         }

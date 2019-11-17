@@ -28,11 +28,11 @@ public class Option {
 
     public String getName()
     {
-        // if 'opt' is null, then it is a 'long' option
+        // if 'option' is null, then it is a 'long' option
         return (name == null) ? longName : name;
     }
 
-    public boolean hasLongOpt()
+    public boolean hasLongOption()
     {
         return longName != null;
     }
@@ -43,5 +43,17 @@ public class Option {
 
     public boolean isRequired() {
         return required;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getNameWithHyphens() {
+        return "-".concat(this.name);
+    }
+
+    public String getLongNameWithHyphens() {
+        return "--".concat(this.longName);
     }
 }
