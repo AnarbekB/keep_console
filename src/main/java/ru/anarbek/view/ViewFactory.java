@@ -4,7 +4,7 @@ import ru.anarbek.constant.Argument;
 
 public class ViewFactory {
 
-    public static Page build(Argument argument) throws Exception {
+    public static View build(Argument argument) throws Exception {
         switch (argument) {
             case CREATE_KEEP:
                 return new CreateKeep();

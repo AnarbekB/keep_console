@@ -1,8 +1,4 @@
-package ru.anarbek.helper;
-
-import ru.anarbek.cli.Option;
-import ru.anarbek.cli.Options;
-import ru.anarbek.cli.OptionsBuilder;
+package ru.anarbek.cli;
 
 import java.util.ArrayList;
 

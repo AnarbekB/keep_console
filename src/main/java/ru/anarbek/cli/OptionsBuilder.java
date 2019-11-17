@@ -24,7 +24,7 @@ public class OptionsBuilder {
     }
 
     private static ArrayList<Option> loadFromXML(final String path) {
-        ArrayList<Option> records = new ArrayList<Option>();
+        ArrayList<Option> records = new ArrayList<>();
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
@@ -48,11 +48,7 @@ public class OptionsBuilder {
                 );
                 records.add(option);
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
 

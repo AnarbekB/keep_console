@@ -2,8 +2,8 @@ package ru.anarbek;
 
 import ru.anarbek.cli.Option;
 import ru.anarbek.cli.Options;
-import ru.anarbek.helper.ArgumentParser;
-import ru.anarbek.view.Page;
+import ru.anarbek.cli.ArgumentParser;
+import ru.anarbek.view.View;
 import ru.anarbek.view.ViewFactory;
 
 public class Application {
@@ -11,8 +11,8 @@ public class Application {
         try {
             Options options = ArgumentParser.parse(args);
             for (Option option: options.getOptions()) {
-                Page page = ViewFactory.build(option.getArgument());
-                page.render();
+                View view = ViewFactory.build(option.getArgument());
+                view.render();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
