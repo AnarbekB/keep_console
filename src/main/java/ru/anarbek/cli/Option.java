@@ -2,6 +2,9 @@ package ru.anarbek.cli;
 
 import ru.anarbek.constant.Argument;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Option {
 
     private final int id;
@@ -20,7 +23,13 @@ public class Option {
 
     private Options children;
 
-    public Option(int id, String name, String longName, boolean required, String description, Argument argument, Option parent) {
+    private boolean hasData;
+
+    private List<String> values = new ArrayList<>();
+
+    private char valueSeparator;
+
+    public Option(int id, String name, String longName, boolean required, boolean hasData, String description, Argument argument, Option parent) {
         this.id = id;
         this.name = name;
         this.longName = longName;
@@ -28,6 +37,8 @@ public class Option {
         this.description = description;
         this.argument = argument;
         this.parent = parent;
+        this.hasData = hasData;
+        this.valueSeparator = 0;
     }
 
     public int getId() {
@@ -69,6 +80,10 @@ public class Option {
         return "--".concat(this.longName);
     }
 
+    public boolean hasParent() {
+        return parent != null;
+    }
+
     public Option getParent() {
         return parent;
     }
@@ -79,5 +94,31 @@ public class Option {
         } else {
             this.children.addOption(option);
         }
+    }
+
+    public boolean hasChildren() {
+        return children != null;
+    }
+
+    public Options getChildren() {
+        return children;
+    }
+
+    public boolean isHasData() {
+        return hasData;
+    }
+
+    public void addValue(String value) {
+        values.add(value);
+    }
+
+    public String getValue() throws IndexOutOfBoundsException
+    {
+        return hasData ? values.get(0) : null ;
+    }
+
+    public String getValue(int index) throws IndexOutOfBoundsException
+    {
+        return hasData ? null : values.get(index);
     }
 }

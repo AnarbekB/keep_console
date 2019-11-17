@@ -1,20 +1,28 @@
 package ru.anarbek.cli;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ArgumentParser {
 
-    /**
-     * Пока может принемать и парсить только один аргумент, todo: расширить
-     */
     public static Options parse(String[] args) {
+        List<String> argsList = new ArrayList<>(Arrays.asList(args));
+
         Options allAvailableOptions = OptionsBuilder.build();
         ArrayList<Option> options = new ArrayList<>();
 
-        for (String argument: args) {
-            Option option = allAvailableOptions.getOption(argument);
+        for (int i = 0; i < argsList.size(); i++) {
+            Option option = allAvailableOptions.getOption(argsList.get(i));
             if (option != null) {
-                options.add(option);
+                if (option.isHasData()) {
+                    option.addValue(argsList.get(i + 1));
+                    argsList.remove(i + 1);
+                }
+
+                if (!option.hasParent()) {
+                    options.add(option);
+                }
             }
         }
 

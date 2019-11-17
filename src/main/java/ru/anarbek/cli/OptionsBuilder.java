@@ -57,6 +57,7 @@ public class OptionsBuilder {
                         attributes.getNamedItem("name").getTextContent(),
                         attributes.getNamedItem("longName").getTextContent(),
                         attributes.getNamedItem("required").getTextContent().equals("Y"),
+                        attributes.getNamedItem("hasData").getTextContent().equals("Y"),
                         attributes.getNamedItem("description").getTextContent(),
                         Argument.valueOf(attributes.getNamedItem("argument").getTextContent()),
                         parent

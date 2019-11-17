@@ -6,7 +6,7 @@ import ru.anarbek.cli.OptionsBuilder;
 
 public class Help extends AbstractView implements View {
 
-    public void render() {
+    public void render(Option option) {
         this.getDriver().output(this.getContent(), true);
     }
 

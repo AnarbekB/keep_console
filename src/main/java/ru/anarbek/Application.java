@@ -12,7 +12,7 @@ public class Application {
             Options options = ArgumentParser.parse(args);
             for (Option option: options.getOptions()) {
                 View view = ViewFactory.build(option.getArgument());
-                view.render();
+                view.render(option);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
