@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ArgumentParser {
 
-    public static Options parse(String[] args) {
+    public static Options parse(String[] args) throws LoadFileException{
         List<String> argsList = new ArrayList<>(Arrays.asList(args));
 
         Options allAvailableOptions = OptionsBuilder.build();

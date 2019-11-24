@@ -17,13 +17,14 @@ import ru.anarbek.constant.Argument;
 
 public class OptionsBuilder {
 
-    public static Options build() {
+    public static Options build() throws LoadFileException {
         String path = "src/main/resources/options.xml";
+
         ArrayList<Option> options = loadFromXML(path);
         return new Options(options);
     }
 
-    private static ArrayList<Option> loadFromXML(final String path) {
+    protected static ArrayList<Option> loadFromXML(final String path) throws LoadFileException {
         ArrayList<Option> records = new ArrayList<>();
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
@@ -71,7 +72,7 @@ public class OptionsBuilder {
                 records.add(option);
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
+            throw new LoadFileException(e.getMessage());
         }
 
         return records;
