@@ -114,7 +114,7 @@ public class Option {
 
     public String getValue() throws IndexOutOfBoundsException
     {
-        return hasData ? values.get(0) : null ;
+        return (hasData && values.size() > 0) ? values.get(0) : null ;
     }
 
     public String getValue(int index) throws IndexOutOfBoundsException

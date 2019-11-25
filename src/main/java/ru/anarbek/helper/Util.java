@@ -19,4 +19,15 @@ final public class Util {
 
         return str;
     }
+
+    /**
+     * detect option in args[]
+     */
+    public static boolean isOption(String arg) {
+        if (arg == null) {
+            return false;
+        }
+
+        return arg.startsWith("--") || arg.startsWith("-");
+    }
 }
