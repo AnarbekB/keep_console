@@ -9,6 +9,7 @@ import ru.anarbek.view.ViewFactory;
 public class Application {
     public static void main(String[] args) {
         try {
+            Bootstrap.init();
             Options options = ArgumentParser.parse(args);
             for (Option option: options.getOptions()) {
                 View view = ViewFactory.build(option.getArgument());

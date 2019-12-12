@@ -16,6 +16,8 @@ cmake-build-*/
 out/
 target/
 .idea/
+keep.db
+first_run
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
