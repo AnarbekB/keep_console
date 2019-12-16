@@ -10,9 +10,9 @@ public class CreateKeep extends AbstractView implements View {
             String title = option.getChildren().getOption("title").getValue();
             String data = option.getChildren().getOption("data").getValue();
 
-            this.getDriver().output(title + " " + data, true);
+            this.outputLn(title + " " + data);
         } catch (IndexOutOfBoundsException e) {
-            this.getDriver().output("title and data is required", true);
+            this.outputLn("title and data is required");
         }
     }
 }

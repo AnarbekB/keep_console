@@ -10,9 +10,9 @@ public class Help extends AbstractView implements View {
     public void render(Option option) {
         try {
             Options options = OptionsBuilder.build();
-            this.getDriver().output(this.getContent(options), true);
+            this.outputLn(this.getContent(options));
         } catch (LoadFileException e) {
-            this.getDriver().output("Error with load file", true);
+            this.outputLn("Error with load file");
         }
     }
 

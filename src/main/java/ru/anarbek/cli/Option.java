@@ -27,8 +27,6 @@ public class Option {
 
     private List<String> values = new ArrayList<>();
 
-    private char valueSeparator;
-
     public Option(int id, String name, String longName, boolean required, boolean hasData, String description, Argument argument, Option parent) {
         this.id = id;
         this.name = name;
@@ -38,7 +36,6 @@ public class Option {
         this.argument = argument;
         this.parent = parent;
         this.hasData = hasData;
-        this.valueSeparator = 0;
     }
 
     public int getId() {
