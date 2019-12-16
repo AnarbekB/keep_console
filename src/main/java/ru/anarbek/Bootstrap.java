@@ -17,6 +17,9 @@ public class Bootstrap {
             try {
                 migration = new Migration("src/main/resources/migrations");
             } catch (Throwable throwable) {
+                for (StackTraceElement stackTraceElement : throwable.getStackTrace()) {
+                    System.out.println(stackTraceElement.getMethodName() + " " + stackTraceElement.getFileName());
+                }
                 throw new BootstrapApplicationException(
                         "Error load migration for first run application: " + throwable.getMessage()
                 );

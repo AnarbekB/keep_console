@@ -1,8 +1,13 @@
 package ru.anarbek.view;
 
 import ru.anarbek.cli.Option;
+import ru.anarbek.repository.RepositoryException;
 
 public class CreateKeep extends AbstractView implements View {
+
+    CreateKeep() throws RepositoryException {
+        super();
+    }
 
     @Override
     public void render(Option option) {
