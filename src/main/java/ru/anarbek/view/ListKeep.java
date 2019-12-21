@@ -2,19 +2,19 @@ package ru.anarbek.view;
 
 import ru.anarbek.cli.Option;
 import ru.anarbek.entity.Keep;
-import ru.anarbek.repository.RepositoryException;
+import ru.anarbek.provider.ProviderException;
 
 import java.util.List;
 
 public class ListKeep extends AbstractView implements View {
 
-    ListKeep() throws RepositoryException {
+    ListKeep() throws ProviderException {
         super();
     }
 
     public void render(Option option) {
         try {
-            List<Keep> keeps = repository.getAll();
+            List<Keep> keeps = dataProvider.getAll();
 
             if (keeps == null) {
                 this.outputLn("Empty list");
@@ -33,7 +33,7 @@ public class ListKeep extends AbstractView implements View {
 
             this.outputLn(stringBuilder.toString());
 
-        } catch (RepositoryException e) {
+        } catch (ProviderException e) {
             this.outputLn(e.getMessage());
         }
     }

@@ -26,8 +26,22 @@ public class ArgumentParser {
                                         argsList.get(i + 1)
                         );
                     }
-                    option.addValue(argsList.get(i + 1));
+
+                    String text = argsList.get(i + 1);
                     argsList.remove(i + 1);
+                    int j = i + 1;
+                    if (argsList.size() >= j) {
+                        while (!Util.isOption(argsList.get(j))) {
+                            //todo StringBuilder и разнести логику наполнения данными опций
+                            text = text + " " + argsList.get(j);
+                            argsList.remove(j);
+                            if (argsList.size() - 1 < j) {
+                                break;
+                            }
+                        }
+                    }
+
+                    option.addValue(text);
                 }
 
                 if (!option.hasParent()) {

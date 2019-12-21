@@ -1,16 +1,15 @@
 package ru.anarbek.view;
 
-import ru.anarbek.constant.DataProvider;
-import ru.anarbek.repository.Repository;
-import ru.anarbek.repository.RepositoryException;
-import ru.anarbek.repository.RepositoryFactory;
+import ru.anarbek.provider.DataProvider;
+import ru.anarbek.provider.ProviderException;
+import ru.anarbek.provider.RepositoryFactory;
 
 abstract public class AbstractView {
 
-    protected Repository repository;
+    protected DataProvider dataProvider;
 
-    AbstractView() throws RepositoryException {
-        repository = RepositoryFactory.build(DataProvider.DATA_BASE);
+    AbstractView() throws ProviderException {
+        dataProvider = RepositoryFactory.build(ru.anarbek.constant.DataProvider.DATA_BASE);
     }
 
     protected void outputLn(String output) {

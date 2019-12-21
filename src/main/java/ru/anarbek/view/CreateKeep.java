@@ -1,11 +1,13 @@
 package ru.anarbek.view;
 
 import ru.anarbek.cli.Option;
-import ru.anarbek.repository.RepositoryException;
+import ru.anarbek.entity.Keep;
+import ru.anarbek.provider.ProviderException;
+import ru.anarbek.provider.ValidationException;
 
 public class CreateKeep extends AbstractView implements View {
 
-    CreateKeep() throws RepositoryException {
+    CreateKeep() throws ProviderException {
         super();
     }
 
@@ -15,9 +17,12 @@ public class CreateKeep extends AbstractView implements View {
             String title = option.getChildren().getOption("title").getValue();
             String data = option.getChildren().getOption("data").getValue();
 
-            this.outputLn(title + " " + data);
-        } catch (IndexOutOfBoundsException e) {
-            this.outputLn("title and data is required");
+            Keep keep = dataProvider.create(title, data);
+            this.outputLn(keep.getId() + " | " + keep.getTitle() + " | " + keep.getData());
+        } catch (IndexOutOfBoundsException|ValidationException e) {
+            this.outputLn("Validate error: title and data is required");
+        } catch (ProviderException e) {
+            this.outputLn(e.getMessage());
         }
     }
 }

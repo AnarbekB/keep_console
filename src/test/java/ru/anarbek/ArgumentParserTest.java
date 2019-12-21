@@ -32,7 +32,7 @@ public class ArgumentParserTest {
 
     @Test
     public void testParseCrateWithArguments() {
-        String[] args = {"--create", "--title", "Test title", "--data", "Test data text"};
+        String[] args = {"--create", "--title", "Test",  "title", "--data", "Test", "data", "text"};
 
         try {
             Options options = ArgumentParser.parse(args);
@@ -48,8 +48,8 @@ public class ArgumentParserTest {
             assertNotNull(data.getValue());
             assertNotNull(title.getValue());
 
-            assertEquals(args[2], title.getValue());
-            assertEquals(args[4], data.getValue());
+            assertEquals(args[2] + " " + args[3], title.getValue());
+            assertEquals(args[5] + " " + args[6] + " " + args[7], data.getValue());
         } catch (LoadFileException e) {
             fail("Load file options.xml error");
         } catch (InputArgumentsException e) {

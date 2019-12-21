@@ -4,11 +4,11 @@ import ru.anarbek.cli.LoadFileException;
 import ru.anarbek.cli.Option;
 import ru.anarbek.cli.Options;
 import ru.anarbek.cli.OptionsBuilder;
-import ru.anarbek.repository.RepositoryException;
+import ru.anarbek.provider.ProviderException;
 
 public class Help extends AbstractView implements View {
 
-    Help() throws RepositoryException {
+    Help() throws ProviderException {
         super();
     }
 
