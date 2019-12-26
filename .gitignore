@@ -18,6 +18,7 @@ target/
 .idea/
 keep.db
 first_run
+keep_console.properties
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/

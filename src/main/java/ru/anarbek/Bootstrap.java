@@ -1,5 +1,6 @@
 package ru.anarbek;
 
+import com.j256.ormlite.logger.LocalLog;
 import ru.anarbek.db.Migration;
 import ru.anarbek.db.MigrationException;
 
@@ -13,6 +14,8 @@ public class Bootstrap {
     private static Migration migration;
 
     public static void init() throws BootstrapApplicationException {
+        System.setProperty(LocalLog.LOCAL_LOG_LEVEL_PROPERTY, "ERROR");
+
         if (migration == null) {
             try {
                 migration = new Migration("src/main/resources/migrations");

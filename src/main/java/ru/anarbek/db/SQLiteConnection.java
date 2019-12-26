@@ -1,24 +1,36 @@
 package ru.anarbek.db;
 
+import ru.anarbek.helper.Env;
+import ru.anarbek.helper.EnvException;
+
+import java.io.IOException;
 import java.sql.*;
 
-//todo all field it string
 public class SQLiteConnection {
     private Connection connection;
     private static SQLiteConnection instance;
 
+    private SQLiteConnection() {
+
+    }
+
     public static SQLiteConnection connect() throws ClassNotFoundException, SQLException {
         if (instance == null) {
             instance = new SQLiteConnection();
-            //todo move to resource file
             Class.forName("org.sqlite.JDBC");
-            instance.connection = DriverManager.getConnection("jdbc:sqlite:keep.db");
+
+            try {
+                String url = Env.getInstance().getEnv("db.sqllite.url");
+                instance.connection = DriverManager.getConnection(url);
+            } catch (EnvException | IOException e) {
+                throw new SQLException(e.getMessage());
+            }
         }
 
         return instance;
     }
 
-    public SQLiteConnection getConection() {
+    public SQLiteConnection getConnection() {
         return this;
     }
 
