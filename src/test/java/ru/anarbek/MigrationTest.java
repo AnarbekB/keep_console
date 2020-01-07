@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class MigrationTest {
 
     @Test
-    public void testRunAllMigrations() {
+    public void testGetAllMigrations() {
         try {
             Migration migration = new Migration("src/main/resources/migrations");
             ArrayList<File> filesForMigrate = migration.getMigrate(null);
@@ -24,7 +24,7 @@ public class MigrationTest {
     }
 
     @Test
-    public void testGetSQL() throws NoSuchMethodException {
+    public void testGetSQLFromFile() throws NoSuchMethodException {
         Migration migration = null;
         try {
             migration = new Migration("src/main/resources/migrations");
@@ -54,6 +54,4 @@ public class MigrationTest {
             fail(e.getMessage());
         }
     }
-
-    //todo тесты на провал
 }
