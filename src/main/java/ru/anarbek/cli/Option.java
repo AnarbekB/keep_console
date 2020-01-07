@@ -25,9 +25,18 @@ public class Option {
 
     private boolean hasData;
 
+    private boolean isBoolean;
+
+    private boolean isOptionPresent;
+
+    private boolean hasView;
+
     private List<String> values = new ArrayList<>();
 
-    public Option(int id, String name, String longName, boolean required, boolean hasData, String description, Argument argument, Option parent) {
+    public Option(int id,
+                  String name, String longName, boolean required, boolean hasData,
+                  String description, Argument argument, Option parent, boolean hasView
+    ) {
         this.id = id;
         this.name = name;
         this.longName = longName;
@@ -36,6 +45,8 @@ public class Option {
         this.argument = argument;
         this.parent = parent;
         this.hasData = hasData;
+        this.isBoolean = !hasData;
+        this.hasView = hasView;
     }
 
     public int getId() {
@@ -105,6 +116,10 @@ public class Option {
         return hasData;
     }
 
+    public boolean isHasBoolean() {
+        return isBoolean;
+    }
+
     public void addValue(String value) {
         values.add(value);
     }
@@ -117,5 +132,21 @@ public class Option {
     public String getValue(int index) throws IndexOutOfBoundsException
     {
         return hasData ? null : values.get(index);
+    }
+
+    public boolean isOptionPresent() {
+        return isOptionPresent;
+    }
+
+    public void setOptionPresent(boolean optionPresent) {
+        isOptionPresent = optionPresent;
+    }
+
+    public boolean isHasView() {
+        return hasView;
+    }
+
+    public void setHasView(boolean hasView) {
+        this.hasView = hasView;
     }
 }

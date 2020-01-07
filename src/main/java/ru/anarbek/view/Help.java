@@ -12,10 +12,10 @@ public class Help extends AbstractView implements View {
         super();
     }
 
-    public void render(Option option) {
+    public void render(Option option, Options options) {
         try {
-            Options options = OptionsBuilder.build();
-            this.outputLn(this.getContent(options));
+            Options helpOptions = OptionsBuilder.build();
+            this.outputLn(this.getContent(helpOptions));
         } catch (LoadFileException e) {
             this.outputLn("Error with load file");
         }

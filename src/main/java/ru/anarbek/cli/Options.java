@@ -1,5 +1,6 @@
 package ru.anarbek.cli;
 
+import ru.anarbek.constant.Argument;
 import ru.anarbek.helper.Util;
 
 import java.util.*;
@@ -9,6 +10,8 @@ public class Options {
     private final Map<String, Option> shortOpts = new LinkedHashMap<>();
 
     private final Map<String, Option> longOpts = new LinkedHashMap<>();
+
+    private final Map<Argument, Option> argumentOpts = new LinkedHashMap<>();
 
     private final List<Object> requiredOpts = new ArrayList<>();
 
@@ -49,6 +52,7 @@ public class Options {
         }
 
         shortOpts.put(key, opt);
+        argumentOpts.put(opt.getArgument(), opt);
     }
 
     public Option getOption(String option) {
@@ -60,6 +64,10 @@ public class Options {
         }
 
         return longOpts.get(option);
+    }
+
+    public Option getOption(Argument argument) {
+        return argumentOpts.get(argument);
     }
 
     public Collection<Option> getOptions() {

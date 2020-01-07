@@ -12,8 +12,10 @@ public class Application {
             Bootstrap.init();
             Options options = ArgumentParser.parse(args);
             for (Option option: options.getOptions()) {
-                View view = ViewFactory.build(option.getArgument());
-                view.render(option);
+                if (option.isHasView()) {
+                    View view = ViewFactory.build(option.getArgument());
+                    view.render(option, options);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

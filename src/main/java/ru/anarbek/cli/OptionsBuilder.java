@@ -61,7 +61,8 @@ public class OptionsBuilder {
                         attributes.getNamedItem("hasData").getTextContent().equals("Y"),
                         attributes.getNamedItem("description").getTextContent(),
                         Argument.valueOf(attributes.getNamedItem("argument").getTextContent()),
-                        parent
+                        parent,
+                        attributes.getNamedItem("hasView").getTextContent().equals("Y")
                 );
 
                 if (parent != null) {

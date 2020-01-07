@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <options>
-    <option id="0" parent="-1" name="h" longName="help" required="N" hasData="N" description="Help page" argument="HELP"/>
-    <option id="1" parent="-1" name="c" longName="create" required="N" hasData="N" description="Create keep like: -с --title Hello --data World" argument="CREATE_KEEP">
-        <option id="10" parent="1" name="t" longName="title" required="Y" hasData="Y" description="Title for keep" argument="TITLE_KEEP"/>
-        <option id="11" parent="1" name="d" longName="data" required="Y" hasData="Y" description="Data for keep" argument="TITLE_CONTENT"/>
+    <option id="0" parent="-1" name="h" longName="help" required="N" hasData="N" hasView="Y" description="Help page" argument="HELP"/>
+    <option id="1" parent="-1" name="c" longName="create" required="N" hasData="N" hasView="Y" description="Create keep like: -с --title Hello --data World" argument="CREATE_KEEP">
+        <option id="10" parent="1" name="t" longName="title" required="Y" hasData="Y" hasView="N" description="Title for keep" argument="TITLE_KEEP"/>
+        <option id="11" parent="1" name="d" longName="data" required="Y" hasData="Y" hasView="N" description="Data for keep" argument="CONTENT_KEEP"/>
+        <option id="12" parent="1" name="sl" longName="silence" required="N" hasData="N" hasView="N" description="Quiet Creation Mode" argument="SILENCE_CREATE"/>
     </option>
-    <option id="2" parent="-1" name="l" longName="list" required="N" hasData="N" description="List all keeps" argument="LIST_KEEP"/>
+    <option id="2" parent="-1" name="l" longName="list" required="N" hasData="N" hasView="Y" description="List all keeps" argument="LIST_KEEP"/>
+    <option id="30" parent="-1" name="cl" longName="color" required="N" hasData="N" hasView="N" description="Color output" argument="COLOR_OUTPUT"/>
 </options>

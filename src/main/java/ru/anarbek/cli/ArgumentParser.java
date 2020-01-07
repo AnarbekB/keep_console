@@ -1,5 +1,6 @@
 package ru.anarbek.cli;
 
+import ru.anarbek.constant.Argument;
 import ru.anarbek.helper.Util;
 
 import java.util.ArrayList;
@@ -17,9 +18,11 @@ public class ArgumentParser {
         for (int i = 0; i < argsList.size(); i++) {
             Option option = allAvailableOptions.getOption(argsList.get(i));
             if (option != null) {
-                //option expects data
+                //check if option can contain data(text)
                 if (option.isHasData()) {
-                    //Are data an option
+                    option.setOptionPresent(true);
+
+                    //check if data is option, i.e. data(text) missing
                     if (Util.isOption(argsList.get(i + 1))) {
                         throw new InputArgumentsException(
                                 "For option: " + argsList.get(i) + " need data, you input argument: " +
@@ -27,13 +30,13 @@ public class ArgumentParser {
                         );
                     }
 
-                    String text = argsList.get(i + 1);
+                    StringBuilder stringBuilder = new StringBuilder(argsList.get(i + 1));
                     argsList.remove(i + 1);
                     int j = i + 1;
-                    if (argsList.size() >= j) {
+                    if (argsList.size() > j) {
                         while (!Util.isOption(argsList.get(j))) {
-                            //todo StringBuilder и разнести логику наполнения данными опций
-                            text = text + " " + argsList.get(j);
+                            stringBuilder.append(" ");
+                            stringBuilder.append(argsList.get(j));
                             argsList.remove(j);
                             if (argsList.size() - 1 < j) {
                                 break;
@@ -41,7 +44,9 @@ public class ArgumentParser {
                         }
                     }
 
-                    option.addValue(text);
+                    option.addValue(stringBuilder.toString());
+                } else if (option.isHasBoolean()) {
+                    option.setOptionPresent(true);
                 }
 
                 if (!option.hasParent()) {
@@ -52,7 +57,7 @@ public class ArgumentParser {
 
         if (options.size() == 0) {
             //if not arguments, then print help page
-            options.add(allAvailableOptions.getOption("-h"));
+            options.add(allAvailableOptions.getOption(Argument.HELP));
         }
 
         return new Options(options);

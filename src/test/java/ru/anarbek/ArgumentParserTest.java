@@ -2,11 +2,9 @@ package ru.anarbek;
 
 import org.junit.Test;
 import ru.anarbek.cli.*;
+import ru.anarbek.constant.Argument;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class ArgumentParserTest {
 
@@ -20,7 +18,7 @@ public class ArgumentParserTest {
             assertNotNull(options);
             assertEquals(1, options.getOptions().size());
             assertNotNull(options.getOption("c"));
-            assertEquals(2, options.getOption("c").getChildren().getOptions().size());
+            assertEquals(3, options.getOption("c").getChildren().getOptions().size());
             assertNull(options.getOption("c").getChildren().getOption("d").getValue());
             assertNull(options.getOption("c").getChildren().getOption("t").getValue());
         } catch (LoadFileException e) {
@@ -31,14 +29,14 @@ public class ArgumentParserTest {
     }
 
     @Test
-    public void testParseCrateWithArguments() {
+    public void testParseCreateWithArguments() {
         String[] args = {"--create", "--title", "Test",  "title", "--data", "Test", "data", "text"};
 
         try {
             Options options = ArgumentParser.parse(args);
 
             assertNotNull(options);
-            assertEquals(2, options.getOption("c").getChildren().getOptions().size());
+            assertEquals(3, options.getOption("c").getChildren().getOptions().size());
 
             Option title = options.getOption("c").getChildren().getOption("t");
             assertNotNull(title);
@@ -58,8 +56,74 @@ public class ArgumentParserTest {
     }
 
     @Test
-    public void testParseCrateWithArgumentsErrors() {
-        String[] args = {"--create", "--title", "--data", "Test title", "Test data text"};
+    public void testParseCreateWithArgumentsErrors() {
+        String[] args = {"--create", "--title", "--data", "Test", "title", "Test", "data", "text"};
+
+        try {
+            ArgumentParser.parse(args);
+        } catch (LoadFileException e) {
+            fail("Load file options.xml error");
+        } catch (InputArgumentsException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void testParseListColor() {
+        String[] args = {"--list", "--color"};
+
+        try {
+            Options options = ArgumentParser.parse(args);
+
+            assertNotNull(options);
+            boolean isOptionPresent = options.getOption(Argument.COLOR_OUTPUT).isOptionPresent();
+            assertTrue(isOptionPresent);
+        } catch (LoadFileException e) {
+            fail("Load file options.xml error");
+        } catch (InputArgumentsException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void testParseCreateWithColor() {
+        String[] args = {"--create", "--title", "--data", "Test", "title", "Test", "data", "text", "--color"};
+
+        try {
+            Options options = ArgumentParser.parse(args);
+
+            assertNotNull(options);
+            boolean isOptionPresent = options.getOption(Argument.COLOR_OUTPUT).isOptionPresent();
+            assertTrue(isOptionPresent);
+        } catch (LoadFileException e) {
+            fail("Load file options.xml error");
+        } catch (InputArgumentsException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void testParseCreateWithSilence() {
+        String[] args = {"--create", "--title", "Test", "title", "title", "--data", "Test", "data", "--silence"};
+
+        try {
+            Options options = ArgumentParser.parse(args);
+
+            assertNotNull(options);
+            boolean isOptionPresent = options.getOption(Argument.CREATE_KEEP).getChildren()
+                    .getOption(Argument.SILENCE_CREATE).isOptionPresent();
+            assertTrue(isOptionPresent);
+
+        } catch (LoadFileException e) {
+            fail("Load file options.xml error");
+        } catch (InputArgumentsException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @Test
+    public void testParseCreateWithOneDataWorld() {
+        String[] args = {"--create", "--title", "Test", "title", "--data", "data"};
 
         try {
             ArgumentParser.parse(args);

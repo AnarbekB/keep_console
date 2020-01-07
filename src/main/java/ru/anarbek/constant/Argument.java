@@ -3,7 +3,9 @@ package ru.anarbek.constant;
 public enum Argument {
     CREATE_KEEP,
     TITLE_KEEP,
-    TITLE_CONTENT,
+    CONTENT_KEEP,
     LIST_KEEP,
-    HELP
+    HELP,
+    COLOR_OUTPUT,
+    SILENCE_CREATE
 }
